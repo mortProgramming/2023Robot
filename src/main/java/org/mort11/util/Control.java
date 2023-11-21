@@ -177,20 +177,28 @@ public class Control {
 	 *
 	 * @param value
 	 * @param throttleValue
-	 *            from [-1, 1]
+	 *                      from [-1, 1]
 	 */
-	private static double modifyJoystickAxis(double value, double throttleValue) {
-		// Deadband
-		value = deadband(value, 0.1);
+	private static double modifyJoystickAxis(double value, double throttleValue)
+	{
+	// Deadband
+	value = deadband(value, 0.1);
 
-		// Square the axis
-		value = Math.copySign(value * value, value);
+	// Square the axis
+	value = Math.copySign(value * value, value);
 
-		// takes the throttle value and takes it from [-1, 1] to [0.3, 1], and
-		// multiplies it by the value
-		return value * (throttleValue * -0.4 + 0.6); // before with [0.2, 1]
-		// return value * Math.pow(throttleValue * -0.35 + 0.65, 2);
+	// takes the throttle value and takes it from [-1, 1] to [0.3, 1], and
+	// multiplies it by the value
+	return value * (throttleValue * -0.4 + 0.6); // before with [0.2, 1]
+	// return value * Math.pow(throttleValue * -0.35 + 0.65, 2);
 	}
+	// public static double modifyJoystickAxis(double value, double throttleValue) {
+	// 	value = deadband(value, 0.1);
+
+	// 	throttleValue = -(throttleValue + 1) / 2;
+
+	// 	return Math.copySign(value * value, value) * (throttleValue * (0.8 - 0.1) + 0.1);
+	// }
 
 	public static double getJoystickX() {
 		return -(modifyJoystickAxis(joystick.getX(), throttle.getRawAxis(2)) * MAX_VELOCITY_METERS_PER_SECOND) * 0.75;

@@ -23,18 +23,28 @@ public class ConeHighCubeFloorEngage extends SequentialCommandGroup {
 		drivetrain = Drivetrain.getInstance();
 		addRequirements(drivetrain);
 
+		// addCommands(
+		// 		new ParallelDeadlineGroup(
+		// 				new SequentialCommandGroup(new SetClawPiston(false), new WaitCommand(0.2), new ScoreCone(),
+		// 						new ParallelCommandGroup(SetArmAndElevator.rest(),
+		// 								new MoveToPos(Units.inchesToMeters(180), 0, 0, 1.75, 1).withTimeout(7))),
+		// 				new Stow()),
+		// 		new ParallelDeadlineGroup(new SequentialCommandGroup(
+		// 				new MoveToPos(Units.inchesToMeters(50), 0, 180, 1.75, 1).withTimeout(2), new WaitCommand(0.2)),
+		// 				new FloorIntake()),
+		// 		new ParallelDeadlineGroup(new SequentialCommandGroup(new MoveToPos(-4, 0, 180, 2, 2)), new Stow()), // 1.75,
+		// 																											// -3.7
+		// 		new ParallelDeadlineGroup(new Balance(), new Spit()));
 		addCommands(
 				new ParallelDeadlineGroup(
 						new SequentialCommandGroup(new SetClawPiston(false), new WaitCommand(0.2), new ScoreCone(),
-								new ParallelCommandGroup(SetArmAndElevator.rest(),
-										new MoveToPos(Units.inchesToMeters(180), 0, 0, 1.75, 1).withTimeout(7))),
-						new Stow()),
-				new ParallelDeadlineGroup(new SequentialCommandGroup(
-						new MoveToPos(Units.inchesToMeters(50), 0, 180, 1.75, 1).withTimeout(2), new WaitCommand(0.2)),
-						new FloorIntake()),
-				new ParallelDeadlineGroup(new SequentialCommandGroup(new MoveToPos(-4, 0, 180, 2, 2)), new Stow()), // 1.75,
+								new ParallelCommandGroup(SetArmAndElevator.rest().withTimeout(2),
+										new MoveToPos(Units.inchesToMeters(142), 0, 0, 1.5, 1).withTimeout(5.75)))
+						),
+						
+				new ParallelDeadlineGroup(new SequentialCommandGroup(new MoveToPos(Units.inchesToMeters(68)*-1, 0, 0	, 1.75, 2))), // 1.75,
 																													// -3.7
-				new ParallelDeadlineGroup(new Balance(), new Spit()));
+				new ParallelDeadlineGroup(new Balance()));
 
 	}
 }

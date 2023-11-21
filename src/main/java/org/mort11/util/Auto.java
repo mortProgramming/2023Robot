@@ -52,11 +52,14 @@ public class Auto {
 
 		autoChooser.addOption("Upper Cone, Taxi, Engage",
 				new SequentialCommandGroup(new SetClawPiston(false), new WaitCommand(0.2), new ScoreCone(),
-						SetArmAndElevator.rest(), new TimedDrive(3, 1.7, 0, 0), new WaitCommand(0.1),
+						SetArmAndElevator.rest(), new TimedDrive(3, 1.5, 0, 0), new WaitCommand(0.1),
 						new TimedDrive(2, -1.8, 0, 0), new Balance()));
 
+		// autoChooser.addOption("Upper Cone, Taxi", new SequentialCommandGroup(new SetClawPiston(false),
+		// 		new WaitCommand(0.2), new ScoreCone(), SetArmAndElevator.rest(), new TimedDrive(3, 1.5, 0, 0)));
+		
 		autoChooser.addOption("Upper Cone, Taxi", new SequentialCommandGroup(new SetClawPiston(false),
-				new WaitCommand(0.2), new ScoreCone(), SetArmAndElevator.rest(), new TimedDrive(3, 1.5, 0, 0)));
+				new WaitCommand(0.2), new ScoreCone(), SetArmAndElevator.rest().withTimeout(2), new TimedDrive(3, 1.3, 0, 0)));
 
 		autoChooser.addOption("CLEAN Upper cube, Upper cone (BLUE)", new CubeHighConeHigh(true));
 		autoChooser.addOption("CLEAN Upper cube, Upper cone (RED)", new CubeHighConeHigh(false));
